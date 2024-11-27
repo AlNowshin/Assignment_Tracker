@@ -1,0 +1,52 @@
+<%- include ('../Partials/header.ejs') %>
+<%- include ('../Partials/main_nav.ejs') %>
+
+<!-- Assignment Database -->
+<main class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-10">
+            <h1><%= title %></h1>
+            <br>
+            <a href="/assignments/add" class="btn btn-primary" role="button">
+                <i class="fas fa-plus-circle"></i> Add Assignment
+            </a>
+            <table class="table table-bordered table-striped table-hover mt-3">
+                <thead>
+                    <tr class="d-flex">
+                        <th class="text-center col-2">Assignment Name</th>
+                        <th class="text-center col-2">Course Name</th>
+                        <th class="text-center col-1">Status</th>
+                        <th class="text-center col-1">Priority</th>
+                        <th class="text-center col-1">Due Date</th>
+                        <th class="text-center col-1">Edit</th>
+                        <th class="text-center col-1">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr class="d-flex">
+                            <% for (let count = 0; count < assignmentList.length; count++) { %>
+                            <td class="text-center col-2"><%= assignmentList[count].name %></td>
+                            <td class="text-center col-2"><%= assignmentList[count].course %></td>
+                            <td class="text-center col-1"><%= assignmentList[count].status %></td>
+                            <td class="text-center col-1"><%= assignmentList[count].priority %></td>
+                            <td class="text-center col-1"><%= new Date(assignmentList[count].dueDate).toLocaleDateString() %></td>
+                            <td class="text-center col-1">
+                                <a href="/track/edit/<%= assignmentList[count]._id %>" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
+                            </td>
+                            <td class="text-center col-1">
+                                <a href="/track/delete/<%= assignmentList[count]._id %>" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                            <% } %>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<%- include('../Partials/footer.ejs') %>

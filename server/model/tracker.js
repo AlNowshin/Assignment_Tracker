@@ -5,7 +5,8 @@ const assignmentSchema = mongoose.Schema({
     name: { type: String, required: true },       
     subject: { type: String, required: true },    
     dueDate: { type: Date, required: true },       
-    priority: { type: Number, required: true },   
+    priority: { type: String, required: true },  
+    status: { type: String, enum: ['Pending', 'In Progress', 'Completed'], required: true } 
   }, {
     collection: "assignments"                       // Collection name in MongoDB
   });

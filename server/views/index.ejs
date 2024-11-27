@@ -1,14 +1,46 @@
-<%- include('partials/_header') %>
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/main_nav.ejs') %> 
 
-<main class= "container mt-5 text-center"></main>
-    <header>
-        <h1 class = "display-4">Welcome to Assignment Tracker!!!</h1>
-    </header>
+<title><%= title %></title>
+</head>
+<body>
+  <!-- Page Heading -->
+  <h1>Assignments Tracker</h1>
 
-    <section class="my-4 d-flex justify-content-center">
-    </section>
-    <main>
-        <p>Track your assignments here!</p>
-    </main>
+  <!-- Assignments Table -->
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (assignments && assignments.length > 0) { %>
+        <% assignments.forEach(function(assignment) { %>
+          <tr>
+            <td><%= assignment.name %></td>
+            <td><%= assignment.subject %></td>
+            <td><%= assignment.dueDate %></td>
+            <td><%= assignment.priority %></td>
+            <td>
+              <!-- Actions, e.g., Edit or Delete -->
+              <a href="/edit/<%= assignment.id %>">Edit</a> |
+              <a href="/delete/<%= assignment.id %>">Delete</a>
+            </td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="5">No assignments found.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
 
-<%- include('partials/_footer') %>
+  <%- include('../Partials/footer.ejs')%>
+</body>
+</html>
